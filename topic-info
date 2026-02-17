@@ -1,0 +1,10 @@
+#!/bin/sh
+. up
+topic_name="$1"
+
+if [ -z "$topic_name" ]; then
+  echo "Uso: $0 <nome_do_topico>"
+  exit 1
+fi
+
+ros2 topic info "$topic_name"

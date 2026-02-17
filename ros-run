@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# carregar workspace ROS
+source ~/projects/proj1/install/setup.bash
+
+pkg_name="$1"
+launch_name="$2"
+
+if [ -z "$pkg_name" ]; then
+  echo "Uso: $0 <pkg> <executable>"
+  exit 1
+fi
+
+if [ -z "$launch_name" ]; then
+  echo "Uso: $0 <pkg> <executable>"
+  exit 1
+fi
+
+echo "Rodando: ros2 run $pkg_name $launch_name"
+ros2 run "$pkg_name" "$launch_name"

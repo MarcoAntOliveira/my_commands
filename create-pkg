@@ -1,0 +1,4 @@
+#!/bin/sh
+ ros2 pkg create $name_pkg $param1 $param2  
+
+

@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Identifica o diretório onde o script está sendo executado
+DIRETORIO_ATUAL=$(pwd)
+
+echo "Atualizando workspace em: $DIRETORIO_ATUAL"
+
+# 1. Source do ROS base (instalação do sistema)
+# O uso de braces {} em ${ROS_DISTRO} é uma boa prática para evitar erros
+if [ -f "/opt/ros/${ROS_DISTRO}/setup.bash" ]; then
+    source "/opt/ros/${ROS_DISTRO}/setup.bash"
+else
+    echo "Erro: ROS_DISTRO não definido ou setup.bash não encontrado em /opt/ros/"
+fi
+
+# 2. Source do setup local (relativo ao diretório atual)
+if [ -f "install/setup.bash" ]; then
+    source "install/setup.bash"
+    echo "Setup local (install/setup.bash) carregado com sucesso."
+else
+    echo "Aviso: install/setup.bash não encontrado no diretório atual."
+fi
+
+# 3. Source do seu projeto específico (mantido como fallback ou exemplo)
+# Se você quiser que ele sempre procure o 'proj1', mantemos assim:
+if [ -f "/home/marco/projects/proj1/install/setup.bash" ]; then
+    source "$DIRETORIO_ATUAL/install/setup.bash"
+fi

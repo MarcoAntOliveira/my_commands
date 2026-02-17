@@ -1,0 +1,4 @@
+#!/bin/sh
+. up
+
+ros2 topic list

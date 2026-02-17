@@ -1,0 +1,2 @@
+#!/bin/sh
+python3 /home/marco/projects/osc.py

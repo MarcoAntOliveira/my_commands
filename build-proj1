@@ -1,0 +1,14 @@
+#!/bin/sh
+cd /home/marco/projects/proj1
+make up
+if["$cmd" -eq "bil"]
+  make bil
+
+elif["$cmd" -eq "move"]
+	make move
+
+elif["$cmd" -eq "sensor_manager"]
+	make sensor_manager
+make build
+serial
+
