@@ -1,0 +1,3 @@
+#!/bin/bash
+. up
+colcon build --symlink-install --packages-select px4_msgs
