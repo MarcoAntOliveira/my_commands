@@ -1,4 +1,4 @@
 #!/bin/sh
 cd ~/projects/drone_ws
-
+code .
 

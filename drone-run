@@ -1,0 +1,3 @@
+#!/bin/sh
+. up
+ros-lnch drone_bringup quadcopter_launch.py

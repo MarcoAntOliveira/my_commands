@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Script para transformar submódulos/repositórios clonados em pastas locais
+# Útil para pacotes ROS 2 como px4_msgs e px4_ros_com
+
+echo "--- Iniciando limpeza de vínculos Git internos ---"
+
+# 1. Remove as pastas do cache do repositório principal
+# Adicione ou remova pastas da lista abaixo conforme necessário
+pastas=("src/px4_msgs" "src/px4_ros_com")
+
+for pasta in "${pastas[@]}"; do
+    if [ -d "$pasta" ]; then
+        echo "Processando: $pasta"
+        
+        # Remove do index do Git (sem apagar os arquivos)
+        git rm -r --cached "$pasta" 2>/dev/null
+        
+        # Remove a pasta oculta .git de dentro do pacote
+        rm -rf "$pasta/.git"
+        
+        # Adiciona a pasta novamente como conteúdo local
+        git add "$pasta"
+        
+        echo "OK: $pasta agora é uma pasta local."
+    else
+        echo "Aviso: $pasta não encontrada."
+    fi
+done
+
+echo "--- Processo concluído ---"
+echo "Agora você pode rodar: git commit -m 'Sua mensagem' e git push"
