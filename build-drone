@@ -1,35 +1,33 @@
 #!/bin/bash
 
-# Ordem corrigida por dependência
+# Lista dos pacotes para compilar
 PACKAGES=(
+    "coletor"
+    "missions"
     "my_px4_interfaces"
     "px4_msgs"
     "px4_ros_com"
-    "missions"
-    "coletor"
     "swarm_drone"
 )
 
-echo "Iniciando compilação individual com limite de hardware..."
+echo "Iniciando compilação individual dos pacotes..."
 echo "--------------------------------------------"
 
+# Loop através da lista
 for PKG in "${PACKAGES[@]}"
 do
     echo "==> Compilando: $PKG"
     
-    # --parallel-workers 1: Compila um pacote por vez
-    # --executor sequential: Processa as tarefas internas uma após a outra
-    # --cmake-args -DCMAKE_BUILD_TYPE=Release: Usa menos memória que o modo Debug
-    colcon build --symlink-install \
-                 --packages-select "$PKG" \
-                 --parallel-workers 1 \
-                 --executor sequential \
-                 --cmake-args -DCMAKE_BUILD_TYPE=Release
-
+    # Executa o colcon para o pacote específico
+    # --symlink-install: evita ter que recompilar para mudanças em scripts python/arquivos de config
+    # --packages-select: filtra apenas o pacote desejado
+    colcon build --symlink-install --packages-select "$PKG"
+    
+    # Verifica se a compilação do pacote anterior teve sucesso
     if [ $? -eq 0 ]; then
         echo "Successfully built: $PKG"
     else
-        echo "Error building: $PKG. Aborting."
+        echo "Error building: $PKG. Aborting script."
         exit 1
     fi
     echo "--------------------------------------------"

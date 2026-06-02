@@ -1,0 +1,4 @@
+#!/bin/sh
+cd /home/marco/projects/PX4-Autopilot/sim_ws
+code /home/marco/projects/PX4-Autopilot/sim_ws
+
