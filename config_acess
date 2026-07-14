@@ -1,0 +1,4 @@
+#!/bin/bash
+sudo nmcli device wifi hotspot ifname wlan0 ssid "test" password "0508"
+
+sudo nmcli con modify "Hotspot" connection.autoconnect yes
