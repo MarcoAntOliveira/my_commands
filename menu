@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Guarda as pastas do diretório atual
+dirs=( */ )
+
+if [ ${#dirs[@]} -eq 0 ]; then
+  echo "Nenhum diretório encontrado aqui."
+  exit 1
+fi
+
+PS3="Digite o número da pasta desejada: "
+
+select dir in "${dirs[@]}" "Cancelar"; do
+  case $dir in
+    "Cancelar")
+      echo "Saindo..."
+      break
+      ;;
+    "")
+      echo "Opção inválida!"
+      ;;
+    *)
+      cd "$dir" && exec $SHELL
+      break
+      ;;
+  esac
+done
